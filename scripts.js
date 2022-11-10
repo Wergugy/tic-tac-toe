@@ -12,7 +12,9 @@ const game = (() => {
 
         const start = () => {
                 gameBoard.setUp();
-                
+                for (_turn; _turn <= 9; _turn++) {
+                        
+                }
 
         };
 
