@@ -3,30 +3,30 @@ const game = (() => {
 
         const currentMark = () => {
                 if ((_turn % 2) === 0) return 'X';
-                else return '0';
+                else return 'O';
         };
 
-        const nextTurn = () => _turn++;
-
-        const reset = () => _turn = 0;
+        const nextTurn = () => {
+                _turn++;
+                if (_turn === 9);
+        };
 
         const start = () => {
+                _turn = 0;
+                gameBoard.reset();
                 gameBoard.setUp();
-                for (_turn; _turn <= 9; _turn++) {
-                        
-                }
-
         };
 
-        return {currentMark, nextTurn, reset, start};
+        return {currentMark, nextTurn, start};
 })();
 
 const gameBoard = (() => {
-        const _tiles = Array.from(document.querySelectorAll('.place'));
-
+        const _tiles = document.querySelectorAll('td.place');
+ 
         const _placeMark = (e) => {
                 e.preventDefault();
-                e.target.textContent = game.currentMark;
+                e.target.textContent = game.currentMark();
+                game.nextTurn();
         };
         
         const setUp = () => {
