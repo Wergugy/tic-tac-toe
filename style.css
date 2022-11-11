@@ -34,8 +34,10 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-
+        
         height: 100vh;
+        width: 100vw;
+        
 }
 ol, ul {
 	list-style: none;
@@ -77,3 +79,72 @@ tr:first-child {
 tr:last-child {
         border-top: 1px solid black;
 }
+
+input[type=text] {
+        border: none;
+        font-size: 18px;
+        height: 20px;
+        margin-left: 10px;
+}
+
+label {
+        font-size: 14px;
+}
+
+label[for=playerTwoName],
+label[for=playerOneName] {
+        flex: 1 0 auto;
+}
+
+.main {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 30px;
+
+        margin-left: 80px;
+        width: 300px;
+        height: 100%;
+}
+
+div.player {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+}
+
+table.gameBoard {
+        margin-left: 80px;
+}
+
+div.intro {
+        margin-top: 100px;
+}
+
+p.info {
+        text-align: center;
+        
+}
+
+h1 {
+        margin-left: 80px;
+        margin-bottom: 20px;
+        font-size: 32px;
+}
+
+button.play {
+        margin: 30px 0px 0px 90px;
+        width: 80px;
+        padding: 5px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 10px;
+}
+
+.oBox,
+.xBox {
+        width: min-content;
+        text-align: center;
+}
+

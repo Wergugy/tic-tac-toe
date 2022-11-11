@@ -9,23 +9,60 @@
         <script src="./scripts.js" defer></script>
 </head>
 <body>
-        <table class="gameBoard">
-                <tr>
-                        <td class="place r1 c1 d1">0</td>
-                        <td class="place r1 c2">1</td>
-                        <td class="place r1 c3 d2">2</td>
-                </tr>
-                <tr>
-                        <td class="place r2 c1">3</td>
-                        <td class="place r2 c2 d1 d2">4</td>
-                        <td class="place r2 c3">5</td>
-                </tr>
-                <tr>
-                        <td class="place r3 c1 d2">6</td>
-                        <td class="place r3 c2">7</td>
-                        <td class="place r3 c3 d1">8</td>
-                </tr>
-        </table>
+        <div class="main">
+                <div class="intro">
+                        <h1>Tic Tac Toe</h1>
+                        <p class="info">As collected deficient objection by it
+                                discovery sincerity curiosity.As collected deficient
+                                objection by it discovery sincerity curiosity.
+                                Quiet decay who round three world whole has mrs man.
+                                Built the china there tried jokes which gay why </p>
+                </div>
+                <div class="gameBox">
+                        <div class="player">
+                                <label for="playerOneName">Player One</label>
+                                <input type="text" name="playerOneName" id="playerOneName" value="Jimothy">
+                                <div class="oBox">
+                                        <label for="oneX">X</label>
+                                        <input type="radio" name="markOne" id="oneX" value="X">
+                                </div>
+                                <div class="oBox">
+                                        <label for="oneO">O</label>
+                                        <input type="radio" name="markOne" id="oneO" value="O">
+                                </div>
+                        </div>
+                        <div class="player">
+                                <label for="playerTwoName">Player Two</label>
+                                <input type="text" name="playerTwoName" id="playerTwoName" value="Hestophar">
+                                <div class="oBox">
+                                        <label for="twoX">X</label>
+                                        <input type="radio" name="markTwo" id="twoX" value="X">
+                                </div>
+                                <div class="oBox">
+                                        <label for="TwoO">O</label>
+                                        <input type="radio" name="markTwo" id="TwoO" value="O">
+                                </div>
+                        </div>
+                        <table class="gameBoard">
+                                <tr>
+                                        <td class="place r1 c1 d1"></td>
+                                        <td class="place r1 c2"></td>
+                                        <td class="place r1 c3 d2"></td>
+                                </tr>
+                                <tr>
+                                        <td class="place r2 c1"></td>
+                                        <td class="place r2 c2 d1 d2"></td>
+                                        <td class="place r2 c3"></td>
+                                </tr>
+                                <tr>
+                                        <td class="place r3 c1 d2"></td>
+                                        <td class="place r3 c2"></td>
+                                        <td class="place r3 c3 d1"></td>
+                                </tr>
+                        </table>
+                        <button class="play">Play</button>
+                </div>
+        </div>
         
 </body>
 </html>
