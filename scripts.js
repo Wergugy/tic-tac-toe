@@ -1,48 +1,6 @@
-const game = (() => {
-        let _turn = 0
-        ,_player1
-        ,_player2;
-
-        const _checkWinner = () => {
-                if (_turn === 9) console.log('Its a Tie!');
-                else if (gameBoard.checkTiles(_player1['mark'])) {
-                        console.log(`${_player1['name']} Wins!`);
-                        _end();
-                }
-                else if (gameBoard.checkTiles(_player2['mark'])) {
-                        console.log(`${_player2['name']} Wins!`);
-                        _end();
-                }; 
-        };
-
-        const _makePlayers = () => {
-                _player1 = player('Jimothy', 'X')
-                _player2 = player('Hestophar', 'O');
-        };
-
-        const _end = () => {
-                gameBoard.lock();
-        }
-
-        const currentMark = () => {
-                if ((_turn % 2) === 0) return 'X';
-                else return 'O';
-        };
-
-        const nextTurn = () => {
-                _turn++;
-                _checkWinner();
-        };
-
-        const start = () => {
-                _turn = 0;
-                _makePlayers();
-                gameBoard.reset();
-                gameBoard.setUp();
-        };
-
-        return {currentMark, nextTurn, start};
-})();
+const player = (name, mark) => {
+        return {name, mark};
+};
 
 const gameBoard = (() => {
         const _tiles = Array.from(document.querySelectorAll('td.place'));
@@ -63,7 +21,7 @@ const gameBoard = (() => {
 
         const lock = () => {
                 _tiles.forEach(t => t.removeEventListener('click', _placeMark, {once:true}));
-        }
+        };
 
         const checkTiles = (mark) => {
                 switch (true) { 
@@ -108,6 +66,60 @@ const gameBoard = (() => {
         return {setUp,reset, checkTiles, lock};
 })();
 
-const player = (name, mark) => {
-        return {name, mark};
-};
+
+const game = (() => {
+        let _turn = 0
+        ,_player1
+        ,_player2;
+
+        const _checkWinner = () => {
+                if (gameBoard.checkTiles(_player1['mark'])) {
+                        console.log(`${_player1['name']} Wins!`);
+                        _end();
+                }
+                else if (gameBoard.checkTiles(_player2['mark'])) {
+                        console.log(`${_player2['name']} Wins!`);
+                        _end();
+                }
+                else if (_turn === 9) console.log('Its a Tie!');
+        };
+
+        const _makePlayers = () => {
+                _player1 = player('Jimothy', 'X')
+                _player2 = player('Hestophar', 'O');
+        };
+
+        const _end = () => {
+                gameBoard.lock();
+        };
+
+        const currentMark = () => {
+                if ((_turn % 2) === 0) return 'X';
+                else return 'O';
+        };
+
+        const nextTurn = () => {
+                _turn++;
+                _checkWinner();
+        };
+
+        const start = (e) => {
+                if (e) {
+                e.preventDefault();
+                _turn = 0;
+                _makePlayers();
+                gameBoard.reset();
+                gameBoard.setUp();
+                }
+                else return;
+               
+        };
+
+        
+
+        return {currentMark, nextTurn, start};
+})();
+
+document.querySelector('.play').addEventListener('click', game.start());
+
+
