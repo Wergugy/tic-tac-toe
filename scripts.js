@@ -63,7 +63,7 @@ const gameBoard = (() => {
                 return mark;
         };
 
-        return {setUp,reset, checkTiles, lock};
+        return {setUp, reset, checkTiles, lock};
 })();
 
 
@@ -104,22 +104,18 @@ const game = (() => {
         };
 
         const start = (e) => {
-                if (e) {
                 e.preventDefault();
                 _turn = 0;
                 _makePlayers();
                 gameBoard.reset();
                 gameBoard.setUp();
-                }
-                else return;
-               
         };
 
+        const _playButton = document.querySelector('.play');
         
+        _playButton.addEventListener('click', start);
 
-        return {currentMark, nextTurn, start};
+        return {currentMark, nextTurn};
 })();
-
-document.querySelector('.play').addEventListener('click', game.start());
 
 
