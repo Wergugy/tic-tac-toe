@@ -1,6 +1,3 @@
-const player = (name, mark) => {
-        return {name, mark};
-};
 
 const gameBoard = (() => {
         const _tiles = Array.from(document.querySelectorAll('td.place'));
@@ -69,8 +66,20 @@ const gameBoard = (() => {
 
 const game = (() => {
         let _turn = 0
-        ,_player1
-        ,_player2;
+        , _player1
+        , _player2
+        ;
+
+        const _playButton = document.querySelector('.play')
+        , _playerOneName = document.querySelector('#playerOneName')
+        , _playerOneMarkRadio = document.querySelectorAll('[name=markOne]')
+        , _playerTwoName = document.querySelector('#playerTwoName')
+        , _playerTwoMarkRadio = document.querySelectorAll('[name=markTwo]')
+        ;
+
+        const _player = (name, mark) => {
+                return {name, mark};
+        };
 
         const _checkWinner = () => {
                 if (gameBoard.checkTiles(_player1['mark'])) {
@@ -85,8 +94,13 @@ const game = (() => {
         };
 
         const _makePlayers = () => {
-                _player1 = player('Jimothy', 'X')
-                _player2 = player('Hestophar', 'O');
+
+                const markOne = Array.from(_playerOneMarkRadio).find(e => e.checked).value;
+                const markTwo = Array.from(_playerTwoMarkRadio).find(e => e.checked).value;
+
+
+                _player1 = _player(_playerOneName.value, markOne);
+                _player2 = _player(_playerTwoName.value, markTwo);
         };
 
         const _end = () => {
@@ -103,17 +117,15 @@ const game = (() => {
                 _checkWinner();
         };
 
-        const start = (e) => {
+        const _start = (e) => {
                 e.preventDefault();
                 _turn = 0;
                 _makePlayers();
                 gameBoard.reset();
                 gameBoard.setUp();
         };
-
-        const _playButton = document.querySelector('.play');
         
-        _playButton.addEventListener('click', start);
+        _playButton.addEventListener('click', _start);
 
         return {currentMark, nextTurn};
 })();
