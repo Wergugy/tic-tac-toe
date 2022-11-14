@@ -67,15 +67,30 @@ const gameBoard = (() => {
 const game = (() => {
         let _turn = 0
         , _player1
-        , _player2
-        ;
+        , _player2;
 
         const _playButton = document.querySelector('.play')
         , _playerOneName = document.querySelector('#playerOneName')
         , _playerOneMarkRadio = document.querySelectorAll('[name=markOne]')
         , _playerTwoName = document.querySelector('#playerTwoName')
-        , _playerTwoMarkRadio = document.querySelectorAll('[name=markTwo]')
-        ;
+        , _playerTwoMarkRadio = document.querySelectorAll('[name=markTwo]');
+
+        const switchMarks = () => {
+                const radios = document.querySelectorAll('[type=radio]');
+                radios.forEach((r) => r.addEventListener('click', (e) => {
+                        if (e.target.getAttribute('name') === 'markOne') {
+                                if (Array.from(_playerTwoMarkRadio).find(e => e.checked).value === e.target.value) {
+                                        Array.from(_playerTwoMarkRadio).find(e => !(e.checked)).checked = true;
+                                };
+                        }
+                        else if (e.target.getAttribute('name') === 'markTwo') {
+                                if (Array.from(_playerOneMarkRadio).find(e => e.checked).value === e.target.value) {
+                                        Array.from(_playerOneMarkRadio).find(e => !(e.checked)).checked = true;
+                                };
+                        };
+                            
+                }));
+        };
 
         const _player = (name, mark) => {
                 return {name, mark};
@@ -94,11 +109,8 @@ const game = (() => {
         };
 
         const _makePlayers = () => {
-
                 const markOne = Array.from(_playerOneMarkRadio).find(e => e.checked).value;
                 const markTwo = Array.from(_playerTwoMarkRadio).find(e => e.checked).value;
-
-
                 _player1 = _player(_playerOneName.value, markOne);
                 _player2 = _player(_playerTwoName.value, markTwo);
         };
@@ -126,6 +138,8 @@ const game = (() => {
         };
         
         _playButton.addEventListener('click', _start);
+
+        switchMarks();
 
         return {currentMark, nextTurn};
 })();
