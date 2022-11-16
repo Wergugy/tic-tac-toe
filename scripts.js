@@ -1,6 +1,11 @@
 
 const gameBoard = (() => {
-        const _tiles = Array.from(document.querySelectorAll('td.place'));
+        const _tiles = Array.from(document.querySelectorAll('td.place'))
+        , displayBox = document.querySelector('.contentInDisplay');
+
+        const displayMark = () => {
+                displayBox.textContent = `Next: ${game.currentMark()}`;
+        };
  
         const _placeMark = (e) => {
                 e.preventDefault();
@@ -10,6 +15,7 @@ const gameBoard = (() => {
         
         const setUp = () => {
                 _tiles.forEach(t => t.addEventListener('click', _placeMark, {once:true}));
+                displayMark();
         };
 
         const reset = () => {
@@ -60,7 +66,7 @@ const gameBoard = (() => {
                 return mark;
         };
 
-        return {setUp, reset, checkTiles, lock};
+        return {setUp, reset, checkTiles, lock, displayMark, displayBox};
 })();
 
 
@@ -75,7 +81,7 @@ const game = (() => {
         , _playerTwoName = document.querySelector('#playerTwoName')
         , _playerTwoMarkRadio = document.querySelectorAll('[name=markTwo]');
 
-        const switchMarks = () => {
+        const _switchMarks = () => {
                 const radios = document.querySelectorAll('[type=radio]');
                 radios.forEach((r) => r.addEventListener('click', (e) => {
                         if (e.target.getAttribute('name') === 'markOne') {
@@ -87,8 +93,7 @@ const game = (() => {
                                 if (Array.from(_playerOneMarkRadio).find(e => e.checked).value === e.target.value) {
                                         Array.from(_playerOneMarkRadio).find(e => !(e.checked)).checked = true;
                                 };
-                        };
-                            
+                        }; 
                 }));
         };
 
@@ -98,17 +103,17 @@ const game = (() => {
 
         const _checkWinner = () => {
                 if (gameBoard.checkTiles(_player1['mark'])) {
-                        console.log(`${_player1['name']} Wins!`);
+                        gameBoard.displayBox.textContent = `${_player1['name']} Wins!`;
                         _end();
                 }
                 else if (gameBoard.checkTiles(_player2['mark'])) {
-                        console.log(`${_player2['name']} Wins!`);
+                        gameBoard.displayBox.textContent = `${_player2['name']} Wins!`;
                         _end();
                 }
-                else if (_turn === 9) console.log('Its a Tie!');
+                else if (_turn === 9) gameBoard.displayBox.textContent = 'It\'s a Tie!';
         };
 
-        const _makePlayers = () => {
+        const _makePlayers = () => { 
                 const markOne = Array.from(_playerOneMarkRadio).find(e => e.checked).value;
                 const markTwo = Array.from(_playerTwoMarkRadio).find(e => e.checked).value;
                 _player1 = _player(_playerOneName.value, markOne);
@@ -126,6 +131,7 @@ const game = (() => {
 
         const nextTurn = () => {
                 _turn++;
+                gameBoard.displayMark();
                 _checkWinner();
         };
 
@@ -137,9 +143,12 @@ const game = (() => {
                 gameBoard.setUp();
         };
         
-        _playButton.addEventListener('click', _start);
+       const _initialize = () => {
+                _playButton.addEventListener('click', _start);
+                _switchMarks();
+        };
 
-        switchMarks();
+        _initialize();
 
         return {currentMark, nextTurn};
 })();
