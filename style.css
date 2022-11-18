@@ -28,15 +28,18 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
-
+        
         display: flex;
         justify-content: center;
         align-items: center;
         
         height: 100vh;
         width: 100vw;
+
+        background-color: var(--ivory);
         
 }
 ol, ul {
@@ -50,11 +53,41 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
+
+@font-face {
+        font-family: 'condimentregular';
+        src: url(./fonts/condiment-regular-webfont.woff2) format('woff2'),
+                url(./fonts/condiment-regular-webfont.woff) format('woff');
+        font-weight: normal;
+        font-style: normal;
+
+}
+
+@font-face {
+        font-family: 'orbitron';
+        src: url(./fonts/orbitron-variablefont_wght-webfont.woff2) format('woff2'),
+             url(./fonts/orbitron-variablefont_wght-webfont.woff) format('woff');
+        font-weight: normal;
+        font-style: normal;
+    
+    }
+
+:root {
+        --linen: hsla(24, 100%, 94%, 1);
+        --ivory: hsla(73, 53%, 97%, 1);
+        --light-cyan: hsla(189, 100%, 92%, 1);
+        --baby-blue-eyes: hsla(219, 100%, 84%, 1);
+        --oxford-blue: hsla(219, 59%, 13%, 1);
+
+        font-family: orbitron;
+        
+}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
         table-layout: fixed;
-        
+        background-color: var(--linen);
 }
 
 td {
@@ -85,20 +118,30 @@ input[type=text] {
         font-size: 18px;
         height: 20px;
         margin-left: 10px;
+        background-color: inherit;
+        font-family: orbitron;
+        padding: 2px;
+}
+
+input[type=text]:focus {
+        outline: 2px solid var(--oxford-blue);
+        border-radius: 5px;
 }
 
 label {
-        font-size: 14px;
+        font-size: 12px;
 }
 
 label[for=playerTwoName],
 label[for=playerOneName] {
         flex: 1 0 auto;
+        font-family: orbitron;
+        
 }
 
 .main {
         display: grid;
-        grid-template: 100px 100px repeat(2, 50px) 60px 60px 150px / 1fr;
+        grid-template: 100px repeat(2, 50px) 60px 60px 150px / 1fr;
         align-items: center;
         justify-items: center;
         gap: 0px;
@@ -128,15 +171,24 @@ p.info {
 }
 
 h1 {
-        font-size: 32px;
+        font-size: 36px;
+        font-family: condimentregular;
 }
 
 button.play {
         width: 130px;
-        padding: 5px;
+        padding: 10px 5px 5px;
         font-size: 18px;
         font-weight: 600;
         border-radius: 20px;
+        border: none; 
+        background-color: var(--baby-blue-eyes);
+        font-family: orbitron;
+        
+}
+
+button.play:hover {
+        outline: 3px solid var(--oxford-blue);
 }
 
 .oBox,
